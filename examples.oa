@@ -1,0 +1,13 @@
+# open Archive demo
+Print Hello from open Archive
+Var Set counter=1
+Math Add counter>2
+Var Print counter
+File Write ./tmp/open_archive.log>>demo line
+If FileExists ./tmp/open_archive.log Goto found
+Print log missing
+Label found
+File Read ./tmp/open_archive.log
+Time Show
+Notify Demo finished
+

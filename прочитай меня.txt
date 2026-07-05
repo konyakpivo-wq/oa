@@ -1,0 +1,135 @@
+# open Archive (`.oa`) — прочитай меня
+
+`open Archive` — лёгкий язык автоматизации. Код пишется в обычном текстовом файле с расширением `.oa`, а `oa.py` компилирует его в самостоятельный скрипт: `.sh` на Linux/Android Termux и `.cmd` на Windows.
+
+## Быстрый запуск на Android / Termux
+
+Скопируйте `oa.py` и ваш `.oa` файл из загрузок в текущую папку, скомпилируйте и запустите результат:
+
+```sh
+cp /sdcard/Download/oa.py .
+cp /sdcard/Download/examples.oa .
+python oa.py examples.oa
+./examples.sh
+```
+
+Для другого файла замените `examples.oa` и `examples.sh` на свои имена, например `bot.oa` → `bot.sh`.
+
+> По умолчанию после успешной компиляции `oa.py` сам удаляется. Если нужно оставить компилятор для отладки, запускайте так: `python oa.py --no-self-delete examples.oa`.
+
+## Как писать `.oa`
+
+- Одна команда = одна строка.
+- Регистр не важен: `Print`, `print`, `pRiNt` работают одинаково.
+- Лишние пробелы между словами команды допускаются.
+- Пустые строки и строки, начинающиеся с `#`, игнорируются.
+
+## Все команды
+
+### 🧩 Базовые команды
+
+```oa
+Open Google account
+Open Py
+Terminal Clear
+Sys Info
+Net Ping google.com
+File Create ./tmp/file.txt
+Dir Make ./tmp/folder
+Web Open https://example.com
+Proc Kill chrome.exe
+Delay 2
+Notify Hello
+Print Hello world
+```
+
+### 🛠 Файлы, папки и переменные
+
+```oa
+File Delete ./tmp/file.txt
+File Write ./tmp/log.txt>>hello text
+File Read ./tmp/log.txt
+Dir Delete ./tmp/folder
+Dir List ./tmp
+Var Set counter=1
+Var Print counter
+```
+
+### 🌐 Сеть и интернет
+
+```oa
+Net Download https://example.com/file.txt>>./tmp/file.txt
+Net MyIP
+Web Search open Archive language
+Web PortCheck example.com:443
+Web SpeedTest
+```
+
+### 🤖 Android / Termux API
+
+Для настоящих Android-действий установите приложение/пакет Termux:API. На ПК команды выводят симуляцию или используют доступные desktop-инструменты.
+
+```oa
+Android Vibrate 250
+Android Toast Hello Android
+Android Torch On
+Android Torch Off
+Android Clip Set copied text
+Android TTS Hello from open Archive
+```
+
+### 🖥 Процессы, система и терминал
+
+```oa
+Sys Reboot
+Sys Shutdown
+Proc List
+Proc Run echo hello
+Time Show
+Terminal Title open Archive
+Terminal Color Red
+Terminal Color Green
+Terminal Color Yellow
+Terminal Color Blue
+Terminal Color Reset
+```
+
+### 🎛 Логика и переходы
+
+```oa
+If FileExists ./tmp/log.txt Goto found
+Goto done
+Label found
+Print File exists
+Math Add counter>5
+Label done
+Exit
+```
+
+### 📦 Подключение другого `.oa` файла
+
+`Open Cod [path]` подключает другой `.oa` файл во время парсинга/компиляции. Так можно делать наборы команд или комбинации без изменения `oa.py`.
+
+```oa
+Open Cod ./my_commands.oa
+```
+
+## Пример
+
+```oa
+Print Hello from open Archive
+Var Set counter=1
+Math Add counter>2
+Var Print counter
+File Write ./tmp/open_archive.log>>demo line
+If FileExists ./tmp/open_archive.log Goto found
+Print log missing
+Label found
+File Read ./tmp/open_archive.log
+Time Show
+Exit
+```
+
+## GitHub и свои версии
+
+Вы можете загрузить этот проект на GitHub, менять список команд, названия категорий и эмодзи, делать fork и выпускать свою версию. Если появится хотя бы один форк/другая версия, оригинальная версия перестанет обновляться, спасибо то что прочитали меня.
